@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>1</title> 
+
+	<!--
+	Напишите функцию, которая принимает 1 параметр.
+	При первом вызове она его запоминает, при втором - суммирует переданный параметр с параметром, переданным при предыдущем вызове.  
+	--> 
+ <script> 
+	function sum() {
+		var currentSum = 0;
+		return function(par) {
+			return currentSum = currentSum + par;
+		};
+	};
+	var add = sum();
+	alert(add(2));
+	alert(add(13));
+	alert(add(256));
+
+ </script> 
+
+
+</head> 
+	
+<body> 
+
+</body>
+</html>

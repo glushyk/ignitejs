@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>1</title> 
+
+	<!--
+	Напишите функцию, возвращающую количество собственных вызовов.  
+	--> 
+ <script> 
+ function counter() {
+ 	var numberOfCall = 1;
+ 	return function() {
+ 		return numberOfCall++;
+ 	};
+ };
+ var func1 = counter();
+ var func2 = counter();
+ alert(func1());
+ alert(func1());
+ alert(func2());
+ alert(func1());
+ alert(func2());
+ </script> 
+
+</head> 
+	
+<body> 
+
+</body>
+</html>

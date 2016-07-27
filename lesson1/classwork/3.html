@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>3</title> 
+<!--
+Дан массив чисел: [1,2,31,24,-67,5,3,555,79,-4,21,33,89,-90]. 
+1) Найдите максимальное и минимальное значение массива. 
+2) Все положительные и четные числа запишите в другой массив.
+Результаты выведите на экран.
+--> 
+<script>
+var arr1 = [1,2,31,24,-67,5,3,555,79,-4,21,33,89,-90,1111,56];
+var findMax = function(arr) {
+	var arrLength = arr.length;
+	var max = arr[0];
+	for (var i = 0; i<arrLength; i++) {
+		if (arr[i] > max) {
+			max = arr[i];
+		} 
+	}
+	alert(max);
+};
+var findMin = function(arr) {
+	var arrLength = arr.length;
+	var min = arr[0];
+	for (var i = 0; i<arrLength; i++) {
+		if (arr[i] < min) {
+			min = arr[i];
+		} 
+	}
+	alert(min);
+};
+findMax(arr1);
+findMin(arr1);
+var arr2 =[];
+for (var j = 0; j<arr1.length;j++) {
+	if (arr1[j]>0 && arr1[j]%2 == 0) {
+		arr2.push(arr1[j]);
+	}
+}
+alert(arr2);
+</script>
+</head> 
+	
+<body> 
+<!-- html here --> 
+</body>
+</html>

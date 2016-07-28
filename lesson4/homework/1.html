@@ -6,12 +6,31 @@
 <title>Метод call </title> 
 <!-- 
 
-
+Представьте, что в JavaScript нет метода call, есть только метод apply. Используя apply, напишите метод call.
 
 -->
 
 <script>
 
+
+var obj = {
+	"prop1": "one",
+	"prop2": "two" 
+}
+function test(param1, param2) {
+	alert(this[param1] +" " + this[param2]);
+};
+
+Function.prototype.call = function() { 
+	var arr = [];
+    for (var i = 0; i<arguments.length; i++) {
+    	arr.push(arguments[i]);
+    }
+	
+    this.apply(arr.shift(), arr); 
+}
+
+test.call(obj, 'prop1', 'prop2');
 
 </script>
 </head> 

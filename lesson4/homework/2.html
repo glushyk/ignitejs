@@ -19,7 +19,28 @@ compose(5, doubleTheValue, addOneToTheValue) // должно вернуться 
 -->
 
 <script>
+var doubleTheValue = function(val) { return val * 2; };
+var addOneToTheValue = function(val) { return val + 1; };
 
+function compose() {
+	var value = arguments[0],
+		args = [];
+
+	if (arguments.length == 1) {
+		return arguments[0];
+	};
+
+	for (var i = 1; i < arguments.length; i++) {
+		args.push(arguments[i]);
+	};
+	for (i = 0; i< args.length; i++) {
+		args[i].call(this,value);
+		value = args[i].call(this,value);
+	};
+	return value;	
+};
+
+alert(compose(5, doubleTheValue, addOneToTheValue, doubleTheValue));
 
 </script>
 </head> 

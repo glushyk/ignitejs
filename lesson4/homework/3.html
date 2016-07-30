@@ -32,6 +32,30 @@ for (var i = 0; i < log.length; i++) {
 
 <script>
 
+function work(a) {
+  /* ... */ // work - произвольная функция, один аргумент
+}
+
+function makeLogging(f, log) {
+	return function() {
+		var result = f.apply(this, arguments);
+		for (var i = 0; i < arguments.length; i++) {
+			log.push(arguments[i]);
+		};
+		return result;
+	};
+};
+
+var log = [];
+work = makeLogging(work, log);
+
+work(1); // 1, добавлено в log
+work(5); // 5, добавлено в log
+work(1111,23); // several arguments
+
+for (var i = 0; i < log.length; i++) {
+  alert( 'Лог:' + log[i] ); // "Лог:1", затем "Лог:5"
+}
 
 </script>
 </head> 

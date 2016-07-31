@@ -3,25 +3,31 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
 <head> 
 <meta charset="utf-8">
-<title>1</title> 
+<title>2</title> 
 
 	<!--
-	Напишите функцию, возвращающую количество собственных вызовов.  
+	Каков будет результат выполнения этого кода?
+	var value = 0;
+	function f() {
+	  if (1) {
+	    value = true;
+	  } else {
+	    var value = false;
+	  }
+	  alert( value );
+	}
+	f();
+	Изменится ли внешняя переменная value ? Как изменится рузультат, если из строки var value = false убрать ключевое слово var?
 	--> 
  <script> 
- function counter() {
- 	var numberOfCall = 1;
- 	return function() {
- 		return numberOfCall++;
- 	};
- };
- var func1 = counter();
- var func2 = counter();
- alert(func1());
- alert(func1());
- alert(func2());
- alert(func1());
- alert(func2());
+
+//1. Каков будет результат выполнения этого кода?
+// true
+//2. Изменится ли внешняя переменная value ?
+// Нет
+//3. Как изменится рузультат, если из строки var value = false убрать ключевое слово var?
+// Переменная value не будет найдена внутри функции, и будет найдена в window. Выведет true. Внешняя переменная будет изменена. 
+
  </script> 
 
 </head> 

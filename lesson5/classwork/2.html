@@ -5,37 +5,28 @@
 <meta charset="utf-8">
 <title>2</title> 
 <!-- 
-Перепишите с использованием встроенного метода bind: 
+Превратите объект leader из примера ниже в JSON:
 ```
-function bind(func, context) {
-  return function() {
-    return func.apply(context, arguments);
-  };
-}
-
-var user = {
-  firstName: "Вася",
-  sayHi: function() {
-    alert( this.firstName );
-  }
-}; 
-
-var f = bind(user.sayHi, user);  
-f(); 
+var leader = {
+  name: "Василий Иванович",
+  age: 35
+};
 ``` 
+После этого конвертируйте получившуюся строку обратно в объект.
 -->
 
 <script>
 	
-var user = {
-  firstName: "Вася",
-  sayHi: function() {
-    alert( this.firstName );
-  }
-}; 
+var leader = {
+  name: "Василий Иванович",
+  age: 35
+};
 
-var f = user.sayHi.bind(user);
-f();
+var str = JSON.stringify(leader);
+console.log(str);
+
+leader = JSON.parse(str);
+console.log(leader);
 
 </script>
 </head> 

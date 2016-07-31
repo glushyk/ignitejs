@@ -6,22 +6,27 @@
 <title>3</title> 
 <!-- 
 
-Напишите функцию joinArgs, которая выводит свои аргументы, разделенные символом  ‘*’ на экран в виде строки. 
-Используйте прием “одалживания методов”.  У вас должно получиться: 
-```
-joinArgs(1,2,3) // 1*2*3 
-joinArgs(hello, world, !) // hello*world*!
-```
+Напишите функцию-обертку isValid, которая принимает в качестве аргумента любую функцию и проверяет ее на наличие ошибок. 
+Если ошибок нет, функция, переданная в качестве аргумента, запускается. 
+В противном случае, на экран выводится текст ошибки.
 -->
 
 <script>
 	
-function joinArgs() {
- arguments.customJoin = [].join;
- var result = arguments.customJoin('*');
- return result;	
-}
-alert(joinArgs(1,2,3,4));
+function isValid(f) {
+		try {
+			f();
+		} catch(e) {
+			alert('Ошибка: ' + e.message);
+		};
+};
+
+function test() {
+	return undf;
+};
+
+isValid(test);
+
 
 </script>
 </head> 

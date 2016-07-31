@@ -6,31 +6,31 @@
 <title>1</title> 
 <!-- 
 
-Представьте, что в JavaScript нет метода call, есть только метод apply. Используя apply, напишите метод call.
+Напишите программу, которая принимает математическое выражение (используйте prompt) и результат его получает через eval. При ошибке нужно выводить сообщение и просить изменить некорректный ввод. Ошибкой считается не только некорректное выражение, такое как 2+, но и выражение, возвращающее NaN, например 0/0.
 
 -->
 
 <script>
 
+var result;
 
-var obj = {
-	"prop1": "one",
-	"prop2": "two" 
-}
-function test(param1, param2) {
-	alert(this[param1] +" " + this[param2]);
-};
+while (true) {
+  var expr = prompt("Введите выражение", '');
+  if (expr == null) break;
 
-Function.prototype.call = function() { 
-	var arr = [];
-    for (var i = 0; i<arguments.length; i++) {
-    	arr.push(arguments[i]);
+  try {
+    result = eval(expr);
+    if (isNaN(result)) {
+      throw new Error("Некорректные данные. Введите еще раз");
     }
-	
-    this.apply(arr.shift(), arr); 
+
+    break;
+  } catch (e) {
+    alert(e.message);
+  }
 }
 
-test.call(obj, 'prop1', 'prop2');
+alert( result );
 
 </script>
 </head> 

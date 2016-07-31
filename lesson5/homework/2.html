@@ -6,42 +6,59 @@
 <title>2</title> 
 <!-- 
 
-Напишите функцию compose, которая принимает значение в качестве основного параметра и произвольное количество функций в качестве дополнительных параметров. 
-Функция должна вернуть значение, полученное путем использования основного параметра как аргумента для функций, переданных ей в качестве дополнительных аргументов. Например: 
-```
-var doubleTheValue = function(val) { return val * 2; }
-var addOneToTheValue = function(val) { return val + 1; }
-compose(5, doubleTheValue) //должно вернуться значение 10
-compose(5, doubleTheValue, addOneToTheValue) // должно вернуться значение  11
-```
-Если функции передан только один параметр, она должна вернуть его значение.
+Напишите функцию smartSum, которая:
+
+Принимает произвольное количество аргументов;
+Возвращает сумму всех переданных ей аргументов;
+Принимает за 0 любой аргумент, который не может быть преобразован в числовой тип (т.е при попытке его парсить возвращается NaN);
+Может быть вызвана неограниченное количество раз;
+
+smartSum(3) // 3; 
+smartSum(1, 2)  // 3;
+smartSum(1, 3)(2) // 6; 
+smartSum(1, 2)(3, 4, 5)(6)(7, 10) // 38; 
 
 -->
 
 <script>
-var doubleTheValue = function(val) { return val * 2; };
-var addOneToTheValue = function(val) { return val + 1; };
 
-function compose() {
-	var value = arguments[0],
-		args = [];
 
-	if (arguments.length == 1) {
-		return arguments[0];
-	};
+function smartSum() {
+        var sum = 0;
 
-	for (var i = 1; i < arguments.length; i++) {
-		args.push(arguments[i]);
-	};
-	for (i = 0; i< args.length; i++) {
-		args[i].call(this,value);
-		value = args[i].call(this,value);
-	};
-	return value;	
-};
+	for (var i = 0; i < arguments.length; i++) {
+                if (isNaN(parseInt(arguments[i]))) {
+                        sum += 0;       
+                } else {
+                        sum = sum + arguments[i];
+                };
+                
+        };
 
-alert(compose(5, doubleTheValue, addOneToTheValue, doubleTheValue));
+        function f() {
+                for (var i = 0; i < arguments.length; i++) {
+                        if (isNaN(parseInt(arguments[i]))) {
+                                sum += 0;       
+                        } else {
+                                sum = sum + arguments[i];
+                        };
+                };
 
+                return f;
+        };
+
+        f.toString = function() {
+                return sum;
+        };
+
+        return f;
+}
+
+alert(smartSum(3)) // 3; 
+alert(smartSum(1, 2))  // 3;
+alert(smartSum(1, 3)(2)(4)) // 10; 
+alert(smartSum(1, 2)(3, 4, 5)(6)(7, 10)) // 38; 
+alert(smartSum(1, 2)(3, 4, 5)(6)(7, 10)('test')) //38
 </script>
 </head> 
 	

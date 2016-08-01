@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>1</title> 
+</head>
+<!-- 
+
+Задание:
+
+Напишите код, который получит объект для тега head и запишет его в переменную.
+Напишите код, который получит объект для тега ul и запишет его в переменную.
+Напишите код, который получит объект для второго тега li и запишет его в переменную.
+
+-->
+
+<body>
+  <div>Пользователи:</div>
+  <ul>
+    <li>user1</li>
+    <li>user2</li>
+  </ul>
+
+  <script>
+    var headObj = document.getElementsByTagName('head');
+    var ulObj = document.getElementsByTagName('ul');
+    var liObj = document.getElementsByTagName('li')[1];
+    
+    console.log(headObj);
+    console.log(ulObj);
+    console.log(liObj);
+
+  </script>
+
+</body>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>1</title>
+<style type="text/css">
+   div {
+      width: 150px;
+      height: 150px;
+      margin: 15px;
+      background-color: #999;
+   }
+   span {
+      color: red;
+   }
+</style> 
+</head>
+<!-- 
+
+Создайте страницу. Разместите на ней произвольное количеством элементов. Разработайте сценарий, который будет по очереди перемещать span с текстом и интервалом в 400мс: 1) Перед элементом. 2) Внутри элемента перед тектом 3) Внетри элемента после текста. 4) После элемента.
+
+-->
+
+<body>
+  <div>Какой то текст любой</div><hr>
+  <div>Какой то текст любой</div><hr>
+  <div>Какой то текст любой</div><hr>
+  <div>Какой то текст любой</div><hr>
+
+  <script>
+
+  window.onload = function() {
+
+    var floatSpan = document.createElement('span');
+    floatSpan.innerHTML = 'Я тут';
+
+    var elements = document.querySelectorAll('div'),
+        len = elements.length,
+        insertType = ["beforeBegin", "afterBegin", "beforeEnd", "afterEnd"],
+        elemNumber = 0,
+        insertTypeIndex = 0;
+
+    var timerId = setInterval(function() {
+
+        if (document.querySelectorAll('span')[0]) {
+          document.querySelectorAll('span')[0].remove();
+        }
+
+        elements[elemNumber].insertAdjacentHTML(insertType[insertTypeIndex], floatSpan.outerHTML);
+        insertTypeIndex++;
+
+        if (insertTypeIndex == insertType.length) {
+          elemNumber++;
+          insertTypeIndex =0;
+        };
+
+        if (elemNumber == len) {
+          clearInterval(timerId);
+          alert('END');
+        };
+      }, 600);
+
+  }
+
+  </script>
+</body>
+</body>
+</html>

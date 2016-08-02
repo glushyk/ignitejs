@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>1</title>
+<style type="text/css">
+   div {
+      width: 150px;
+      height: 150px;
+      margin: 15px;
+      position: absolute;
+      background-color: #999;
+   }
+</style> 
+<!-- 
+
+Создайте страницу с 3 элементами div. Напишите сценарий, который будет произвольно менять положение этиъ элементов на странице каждую секунду.
+
+-->
+
+<script>
+
+window.onload = function() {
+
+  var screenWidth = screen.availWidth,
+      screenHeight = screen.availHeight;
+  var div1 = document.querySelector('#one'),
+      div2 = document.querySelector('#two'),
+      div3 = document.querySelector('#three');
+
+  function randomInteger(min, max) {
+    var rand = min - 0.5 + Math.random() * (max - min + 1)
+    rand = Math.round(rand);
+    return rand;
+  };
+
+  setInterval(function() {
+    var pos1 = randomInteger(0, screenWidth),
+        pos2 = randomInteger(0, screenWidth),
+        pos3 = randomInteger(0, screenWidth);
+    div1.style.top = pos1 + 'px';
+    div1.style.left = pos3 + 'px';
+    div2.style.top = pos2 + 'px';
+    div2.style.left = pos1 + 'px';
+    div3.style.top = pos3 + 'px';
+    div3.style.left = pos2 + 'px';
+  },1000);
+}
+
+</script>
+</head> 
+	
+<body> 
+  <div id="one">Какой то текст любой</div>
+  <div id="two">Какой то текст любой</div>
+  <div id="three">Какой то текст любой</div>
+</body>
+</html>

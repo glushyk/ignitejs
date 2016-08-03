@@ -10,8 +10,17 @@
       height: 150px;
       margin: 15px;
       position: absolute;
-      background-color: #999;
-   }
+    }
+    #one {
+      background-color: red;
+    }
+    #two {
+      background-color: green;
+    }
+    #three {
+      background-color: blue;
+    }
+
 </style> 
 <!-- 
 
@@ -36,18 +45,21 @@ window.onload = function() {
   };
 
   setInterval(function() {
-    var pos1 = randomInteger(0, screenWidth),
-        pos2 = randomInteger(0, screenWidth),
-        pos3 = randomInteger(0, screenWidth);
-    div1.style.top = pos1 + 'px';
-    div1.style.left = pos3 + 'px';
-    div2.style.top = pos2 + 'px';
-    div2.style.left = pos1 + 'px';
-    div3.style.top = pos3 + 'px';
-    div3.style.left = pos2 + 'px';
+    var posx1 = randomInteger(0, screenWidth),
+        posy1 = randomInteger(0, screenHeight),
+        posx2 = randomInteger(0, screenWidth),
+        posy2 = randomInteger(0, screenHeight),
+        posx3 = randomInteger(0, screenWidth),
+        posy3 = randomInteger(0, screenHeight);
+    div1.style.top = posy1 - 150 + 'px';
+    div1.style.left = posx1 - 150  + 'px';
+    div2.style.top = posy2 - 150 + 'px';
+    div2.style.left = posx2 - 150 + 'px';
+    div3.style.top = posy3 - 150 + 'px';
+    div3.style.left = posx3 - 150 + 'px';
   },1000);
 }
-
+// Твкое странное вычисление позиции для того, что бы блоки находились максимально в пределах окна и не появлялся скрол.
 </script>
 </head> 
 	

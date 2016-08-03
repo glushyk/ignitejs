@@ -5,6 +5,9 @@
 <meta charset="utf-8">
 <title>1</title>
 <style type="text/css">
+   body {
+    overflow: hidden;
+   }
    div {
       width: 150px;
       height: 150px;
@@ -37,7 +40,7 @@ window.onload = function() {
   var div1 = document.querySelector('#one'),
       div2 = document.querySelector('#two'),
       div3 = document.querySelector('#three');
-
+      
   function randomInteger(min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1)
     rand = Math.round(rand);
@@ -45,21 +48,21 @@ window.onload = function() {
   };
 
   setInterval(function() {
-    var posx1 = randomInteger(0, screenWidth),
-        posy1 = randomInteger(0, screenHeight),
-        posx2 = randomInteger(0, screenWidth),
-        posy2 = randomInteger(0, screenHeight),
-        posx3 = randomInteger(0, screenWidth),
-        posy3 = randomInteger(0, screenHeight);
-    div1.style.top = posy1 - 150 + 'px';
-    div1.style.left = posx1 - 150  + 'px';
-    div2.style.top = posy2 - 150 + 'px';
-    div2.style.left = posx2 - 150 + 'px';
-    div3.style.top = posy3 - 150 + 'px';
-    div3.style.left = posx3 - 150 + 'px';
+    var posx1 = randomInteger(0, screenWidth - 150),
+        posy1 = randomInteger(0, screenHeight - 150),
+        posx2 = randomInteger(0, screenWidth - 150),
+        posy2 = randomInteger(0, screenHeight - 150),
+        posx3 = randomInteger(0, screenWidth - 150),
+        posy3 = randomInteger(0, screenHeight - 150);
+    div1.style.top = posy1 + 'px';
+    div1.style.left = posx1 + 'px';
+    div2.style.top = posy2 + 'px';
+    div2.style.left = posx2 + 'px';
+    div3.style.top = posy3 + 'px';
+    div3.style.left = posx3 + 'px';
   },1000);
 }
-// Твкое странное вычисление позиции для того, что бы блоки находились максимально в пределах окна и не появлялся скрол.
+
 </script>
 </head> 
 	

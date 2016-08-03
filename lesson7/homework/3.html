@@ -3,7 +3,21 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
 <head> 
 <meta charset="utf-8">
-<title>3</title> 
+<title>3</title>
+<style type="text/css">
+	table, td, th {
+    	border: 1px solid black;
+	}
+
+	table {
+    	border-collapse: collapse;
+    	width: 100%;
+	}
+
+	td {
+    	height: 50px;
+	}
+</style> 
 <!-- 
 
 Напишите функцию makeBoard, которая генерирует таблицу с указанным количеством строк и столбцов и закрашивает ее ечейки черным и белым цветами в шахматном порядке.
@@ -14,7 +28,27 @@
 <body> 
 
 <script>
+window.onload = function() {
+	function makeBoard(row, coll) {
+		var table = document.createElement('table');
+		document.body.appendChild(table);
 
+		for (var i = 0; i < row; i++) {
+			var tableRow = document.createElement('tr');
+			table.appendChild(tableRow);
+			for (var j = 0; j < coll; j++) {
+				var tableCell = document.createElement('td');
+				tableRow.appendChild(tableCell);
+				if ((i + j)%2 == 0) {
+					tableCell.style.background = "white"; 
+				} else {
+					tableCell.style.background = "black";
+				}
+			};
+		};
+	};
+	makeBoard(10,10);
+}
 </script>
 </body>
 </html>

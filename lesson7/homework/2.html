@@ -3,6 +3,23 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
 <head> 
 <meta charset="utf-8">
+<style>
+
+	.anchor {
+		width: 100px;
+		height: 100px;
+		margin: 50px auto;
+		border: 1px solid #888;
+		box-shadow: 3px 3px 3px #999;
+	}
+	.note {
+		position: absolute;
+		padding: 5px;
+		color: #555;
+		border: 1px solid #666;
+		border-radius: 4px;
+	}
+</style>
 <title>2</title> 
 <!-- 
 
@@ -14,9 +31,45 @@
 </head> 
 	
 <body> 
-
+<div class="anchor"></div>
 <script>
+window.onload = function() {
+	function positionAt(anchor, position, elem) {
+		var anchorPos = anchor.getBoundingClientRect();
+		
+		switch (position) {
+		  case "top":
+		    elem.style.left = anchorPos.left + "px";
+		    elem.style.top = anchorPos.top - elem.offsetHeight + "px";
+		    break
+		  case "right":
+		    elem.style.left = anchorPos.left + anchor.offsetWidth + "px";
+		    elem.style.top = anchorPos.top + "px";
+		    break
+		  case "bottom":
+		    elem.style.top = anchorPos.bottom + "px";
+		    elem.style.left = anchorPos.left + "px";
+		    break
+		};
+	};
 
+	function showNote(anchor, position, html) {
+		var note = document.createElement('div');
+		note.className = 'note';
+		note.innerHTML = html;
+
+		document.body.appendChild(note);
+
+		positionAt(anchor, position, note);
+	};
+
+	var anchor = document.querySelector('.anchor');
+	showNote(anchor, "top", "Сверху");
+	showNote(anchor, "right", "Справа");
+	showNote(anchor, "bottom", "Снизу");
+
+
+}
 </script>
 </body>
 </html>

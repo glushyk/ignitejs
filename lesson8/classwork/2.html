@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>2</title> 
+<!-- 
+Создайте страницу. Разместите на странице поле ввода, кнопку и пустой div.
+Создайте сценарий, который при нажатии на кнопку будет записывать содержимое поля ввода в пустой div.
+-->
+
+<body>
+
+ <input type="text" /><button>Get value</button>
+ <div class="result"></div>
+
+ <script>
+ window.onload = function() {
+ 	var input = document.querySelector('input'),
+ 		button = document.querySelector('button'),
+ 		result = document.querySelector('.result');
+
+ 	button.addEventListener('click', function() {
+ 		var value = input.value;
+ 		input.value = '';
+ 		result.innerHTML = '';
+ 		result.innerHTML = value;
+ 	})
+ }
+ </script>
+</body>
+</html>

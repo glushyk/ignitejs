@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>1</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<!-- 
+
+Создайте страницу. Разместите на странице 5 элементов div и кнопку. Создайте CSS файл, определите в файле правила, которые зададут всем дивам следующее оформление – высота и ширина 100 px, float=left и зеленый цвет фона. Создайте сценарий, который будет обрабатывать нажатие по кнопке и менять цвет одного из дивов на красный. Смена цвета должна происходить циклически, при первом нажатии первый div становиться красный остальные остаются зелеными, при нажатии на второй – все div становятся зелеными, а второй красный и т.д.
+
+-->
+
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<button>Set color</button>
+
+<script>
+window.onload = function() {
+	var button = document.querySelector('button'),
+		divs = document.querySelectorAll('div');
+	var i = 0;
+
+	button.addEventListener('click', function() {
+		var prev = divs[i].previousElementSibling,
+			len = divs.length;
+
+		divs[len-1].style.background = "green";
+		divs[i].style.background = "red";
+
+		if (prev) {
+			prev.style.background = "green";
+		};
+
+		if (++i == len) {
+			i = 0;
+		};
+	})
+}
+</script>
+
+</body>
+</body>
+</html>

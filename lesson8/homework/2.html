@@ -4,6 +4,36 @@
 <head> 
 <meta charset="utf-8">
 <title>2</title> 
+<style>
+//  body {
+//    margin: 0;
+//    padding: 9;
+//  }
+//  div {
+//    background-color: #4f7a6c;
+//    color: #fff;
+//    border: none;
+//    outline: none;
+//    border-radius: 10px;
+//  }
+  .tooltip {
+    position: absolute;
+    padding: 5px;
+    background-color: #9ab3ab;
+    color: #fff;
+    border-radius: 3px;
+  }
+  .tooltip::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    bottom: -5px;
+    left: 10px; 
+    background-color: #9ab3ab;
+    transform: rotate(45deg);
+  }
+</style>
 <!-- 
 
 При наведении мыши на элемент, на нём возникает событие mouseover, при удалении мыши с элемента – событие mouseout. Зная это, напишите JS-код, который будет делать так, что при наведении на элемент, если у него есть атрибут data-tooltip – над ним будет показываться подсказка с содержимым этого атрибута. Например, две кнопки:
@@ -15,10 +45,82 @@
 </head> 
 	
 <body> 
+  <button data-tooltip="подсказка длиннее, чем элемент" title="test" >Короткая кнопка</button>
+  <button data-tooltip="HTML<br>подсказка" class="test2">Ещё кнопка</button>
+  <br>
+  <div class="out" data-tooltip="red div" style="background-color: red">
+    <div class="between" data-tooltip="green div"  style="background-color: green">
+      <div class="inside" data-tooltip="yellow div"  style="background-color: yellow"></div>
+    </div>
+  </div>
+
+    <div class="out" data-tooltip="red div" style="background-color: red">
+    <div class="between" data-tooltip="green div"  style="background-color: green">
+      <div class="inside" data-tooltip="yellow div"  style="background-color: yellow"></div>
+    </div>
+  </div>
 
 
 <script>
+function toolTiping(e) {
+    var body = document.querySelector('body');
+    var elem = e.target;
+    console.log(elem.dataset);
+    if (elem.dataset.tooltip) {
+      var data = elem.dataset.tooltip,
+          elemPos = elem.getBoundingClientRect(),
+          elemWidth = elem.offsetWidth,
+          tooltipBlock = document.createElement('div');
+      
+      tooltipBlock.className = 'tooltip';
+      tooltipBlock.innerHTML = data;
+  
+      body.appendChild(tooltipBlock);
+  
+      tooltipBlock.style.left = elemPos.left + 10 + 'px';
+      tooltipBlock.style.top = elemPos.top +'px';  
+      console.log(elemPos)
+      console.log(tooltipBlock.style.top)   
+    };
 
+};
+
+function removeTooltip() {
+  var tooltip = document.querySelector('.tooltip');
+  if (tooltip) {
+    tooltip.remove();
+  };  
+}
+window.onload = function() {
+  //var elements = document.querySelector('body').children,
+  //    len = elements.length;
+  //    console.log(elements);
+  //for (var i = 0; i < len; i++) {
+  //  if (elements[i].dataset.tooltip) {
+  //    var element = elements[i];
+  //    element.addEventListener('mouseover', function() {
+  //      var data = this.dataset.tooltip,
+  //          elemPos = this.getBoundingClientRect(),
+  //          elemWidth = this.offsetWidth,
+  //          tooltipBlock = document.createElement('div');
+//
+  //      tooltipBlock.className = 'tooltip';
+  //      tooltipBlock.innerHTML = data;
+//
+  //      document.body.appendChild(tooltipBlock);
+//
+  //      tooltipBlock.style.top = elemPos.top - tooltipBlock.offsetHeight - 10 + 'px';
+  //      tooltipBlock.style.left = elemPos.left +'px';
+  //    });
+  //    element.addEventListener('mouseout', function() {
+  //      var tooltipBlock = document.querySelector('.tooltip');
+  //      tooltipBlock.remove();
+  //    });
+  //  };
+  //};
+  document.addEventListener('mouseover', toolTiping);
+  //document.addEventListener('mouseout', removeTooltip);
+};
 </script>
 </body>
 </html>

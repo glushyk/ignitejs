@@ -3,7 +3,29 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
 <head> 
 <meta charset="utf-8">
-<title>1</title> 
+<title>1</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  .form {
+    width: 20%;
+    margin: 20px auto;
+    padding: 10px;
+    box-shadow: 2px 2px 2px #888;
+    border: 1px solid #888;
+  }
+  label {
+    display: block;
+    margin: 10px;
+  }
+  input {
+    display: block;
+    width: 90%;
+    margin: 10px;
+    padding: 10px;
+  }
+</style>
 <!-- 
 
 Создайте регистрационную форму: логин, пароль, телефон и кнопка "Отправить". По нажатию на кнопку "Отправить", проверьте корректность ввода данных с помощью JavaScript. 1) Логин - не должен содержать цифры. 2) Пароль - не дожен содержать знак $. 3) Телефон - должен содержать только цифры.
@@ -16,12 +38,46 @@
 
 <script>
 
+window.onload = function() {
+  var form = document.querySelector('.form'),
+      login = document.querySelector('#form__login'),
+      password = document.querySelector('#form__password'),
+      tel = document.querySelector('#form__phone');
 
+      form.addEventListener('submit', function(e) {
+        
+        if (login.value.match(/\d/)) {
+          login.style.border = "1px solid red";
+          e.preventDefault();
+        } else {
+          login.style.border = "1px solid green";
+        };
+
+        if (password.value.match(/\$/)) {
+          password.style.border = "1px solid red";
+          e.preventDefault();
+        } else {
+          password.style.border = "1px solid green";
+        };
+
+        if (!tel.value.match(/^\d+$/)) {
+          tel.style.border = "1px solid red";
+          e.preventDefault();
+        } else {
+          tel.style.border = "1px solid green";
+        };
+      });
+}
 
 </script>
 </head> 
 	
 <body> 
-
+<form action="#" method="POST" class="form">
+  <label for="form__login">Login</label><input type="text" id="form__login">
+  <label for="form__password">Password</label><input type="text" id="form__password">
+  <label for="form__phone">Phone</label><input type="tel" id="form__phone">
+  <input type="submit" value="Send" class="form__submit">
+</form>
 </body>
 </html>

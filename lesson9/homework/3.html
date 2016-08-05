@@ -37,8 +37,7 @@ window.onload = function() {
 	function setPosition(e) {
 		var xPos = document.querySelector('#xPos').value,
 			yPos = document.querySelector('#yPos').value;
-		console.log(xPos);
-		console.log(yPos);
+
 		if (isNaN(xPos) || isNaN(yPos)) {
 			alert('Введите числа');
 			e.preventDefault();

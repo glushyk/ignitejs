@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>1</title>
+<style type="text/css">
+</style>
+</head>
+<!-- 
+
+Создайте страницу. Реализуйте следующее:
+
+При нажатии комбинации клавиш ctrl + a (регистр не учитывается!) на экран выводится сообщение ‘Данные выбраны’;
+При нажатии комбинации клавиш ctrl + s (регистр не учитывается!) на экран выводится сообщение ‘Данные сохранены’;
+
+-->
+
+<body>
+
+<script>
+window.addEventListener('load', function() {
+
+  var keys = {};
+
+  document.addEventListener('keydown', function(e) {
+  
+    if ((e.keyCode === 83) && (e.ctrlKey)) {
+        e.preventDefault();
+        alert('Данные сохранены');
+    };
+
+    keys[e.keyCode] = true;
+
+    if (!(keys[17] && keys[65])) {
+      return
+    };
+    if (keys[17] && keys[65]) {
+      alert('Данные выбраны');
+    };
+    keys = {};
+  });
+  document.addEventListener('keyup', function(e) {
+    keys = {};    
+  });
+})
+</script>
+</body>
+</body>
+</html>

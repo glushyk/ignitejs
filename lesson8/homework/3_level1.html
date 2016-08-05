@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>3</title> 
+<!-- 
+
+Создайте страницу-калькулятор. Разместите на странице два поля ввода и кнопки для арифметических операций над данными введенными в поля ввода. Реализуйте данную страницу двумя способами – с использованием модели DOM Level 0 (через атрибуты) и DOM Level 2.
+-->
+<style>
+	button {
+		margin: 5px;
+	}
+</style>
+</head> 
+	
+<body>
+<div class="calculator">
+	<input type="text" id='val1'>
+	<input type="text" id='val2'>
+	<div class="culculator__actions">
+		<button id="add">+</button>
+		<button id="minus">-</button>
+		<button id="multiply">*</button>
+		<button id="division">/</button>
+	</div>
+	<div id="output"></div>
+</div>
+<script>
+
+window.addEventListener('load', function() {
+	var val1 = document.querySelector('#val1'),
+		val2 = document.querySelector('#val2'),
+		output = document.querySelector('#output');
+
+	var add = document.querySelector('#add'),
+		minus = document.querySelector('#minus'),
+		multiply = document.querySelector('#multiply'),
+		division = document.querySelector('#division');
+
+	add.addEventListener('click', function() {
+		var result = +(val1.value) + (+val2.value);
+		output.innerHTML = result;
+	});
+	minus.addEventListener('click', function() {
+		var result = +(val1.value) - (+val2.value);
+		output.innerHTML = result;
+	});
+	multiply.addEventListener('click', function() {
+		var result = +(val1.value) * (+val2.value);
+		output.innerHTML = result;
+	});
+	division.addEventListener('click', function() {
+		if (val2.value == 0) {
+			alert('Делитель не может быть равен нулю');
+			return 
+		}
+		var result = +(val1.value) / (+val2.value);
+		output.innerHTML = result;
+	});
+})
+
+</script>
+</body>
+</html>

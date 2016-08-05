@@ -5,49 +5,50 @@
 <meta charset="utf-8">
 <title>3</title>
 <style type="text/css">
-	table, td, th {
-    	border: 1px solid black;
+	input, button {
+		margin: 10px;
 	}
-
-	table {
-    	border-collapse: collapse;
-    	width: 100%;
-	}
-
-	td {
-    	height: 50px;
+	.test {
+		width: 50px;
+		height: 50px;
+		margin-left: 10px;
+		border: 1px solid #999;
 	}
 </style> 
 <!-- 
 
-Напишите функцию makeBoard, которая генерирует таблицу с указанным количеством строк и столбцов и закрашивает ее ечейки черным и белым цветами в шахматном порядке.
+Создайте страницу с двумя полями ввода, кнопкой и элементом div с шириной и высотой 50px. Создайте сценарий, который по нажатию на кнопку будет перемещать div в координаты, указанные в полях ввода. В случае, если при нажатии кнопки хотя бы одно из полей ввода не заполнено, пользователь должен получить предупреждение, а событие click должно быть отменено.
 -->
 
 </head> 
 	
 <body> 
 
+<input type="text" id="xPos"><input type="text" id="yPos">
+<button class="do">Go</button>
+<div class="test"></div>
+
 <script>
 window.onload = function() {
-	function makeBoard(row, coll) {
-		var table = document.createElement('table');
-		document.body.appendChild(table);
 
-		for (var i = 0; i < row; i++) {
-			var tableRow = document.createElement('tr');
-			table.appendChild(tableRow);
-			for (var j = 0; j < coll; j++) {
-				var tableCell = document.createElement('td');
-				tableRow.appendChild(tableCell);
-				if ((i + j)%2 == 0) {
-					tableCell.style.background = "white"; 
-				} else {
-					tableCell.style.background = "black";
-				}
-			};
-		};
-	};
-	makeBoard(10,10);
+	var button = document.querySelector('.do'),
+		div = document.querySelector('.test');
+
+	function setPosition(e) {
+		var xPos = document.querySelector('#xPos').value,
+			yPos = document.querySelector('#yPos').value;
+		console.log(xPos);
+		console.log(yPos);
+		if (isNaN(xPos) || isNaN(yPos)) {
+			alert('Введите числа');
+			e.preventDefault();
+		}
+		div.style.position = 'absolute';
+		div.style.left = xPos + 'px';
+		div.style.top = yPos +'px';
+	}
+
+	button.addEventListener('click', setPosition);
 }
 </script>
 </body>

@@ -8,7 +8,7 @@
 	.sale {
 		position: absolute;
 		left: 300px;
-		top: 50%;
+		top: 100px;
 		width: 100px;
 		height: 100px;
 		margin: 0 auto;
@@ -33,14 +33,12 @@
 <div class="sale">Скидка</div>
 <script>
 window.onload = function() {
+	var sale = document.querySelector('.sale');
 	document.addEventListener('mousemove', function(e) {
 		var sale = document.querySelector('.sale');
 		var cursorPosX = e.clientX,
 			cursorPosY = e.clientY,
 			salePos = sale.getBoundingClientRect();
-		console.log('x mouse = ' + cursorPosX);
-		console.log('y mouse = ' + cursorPosY);
-		console.log(salePos);
 
 		var centerX = sale.offsetWidth/2,
 			centerY = sale.offsetHeight/2;
@@ -49,20 +47,47 @@ window.onload = function() {
 			saleCenterY = salePos.top + centerY;
 
 		var distance = Math.sqrt(Math.pow((saleCenterX - cursorPosX),2) + Math.pow((saleCenterY - cursorPosY),2));
-
+		var distStep = 20;
+		var top = sale.style.top;
 		if (distance < 60) {
-			if((saleCenterY > (salePos.top + sale.offsetHeight/3)) && (saleCenterY < (salePos.top + sale.offsetHeight*0.75)) && (saleCenterX < cursorPosX)) {
-				//alert('catch')
-				var distStep = 4;
+			if((cursorPosY > (salePos.top + sale.offsetHeight/3)) && (cursorPosY < (salePos.top + sale.offsetHeight*0.75)) && (saleCenterX < cursorPosX)) {				
 				sale.style.left = cursorPosX - sale.offsetWidth - distStep +'px';
-			}
-			//alert('catch')
+			};
+			if((cursorPosX > (salePos.left + sale.offsetWidth/3)) && (cursorPosX < (salePos.left + sale.offsetHeight*0.75)) && (saleCenterY < cursorPosY)) {
+				sale.style.top = cursorPosY - sale.offsetHeight - distStep +'px';
+			};
+			if((cursorPosY > (salePos.top + sale.offsetHeight/3)) && (cursorPosY < (salePos.top + sale.offsetHeight*0.75)) && (saleCenterX > cursorPosX)) {
+				sale.style.left = cursorPosX + distStep +'px';
+			};
+			if((cursorPosX > (salePos.left + sale.offsetWidth/3)) && (cursorPosX < (salePos.left + sale.offsetHeight*0.75)) && (saleCenterY > cursorPosY)) {
+				sale.style.top = cursorPosY  + distStep +'px';
+			};
+			if((cursorPosX > (salePos.left + sale.offsetWidth*0.75)) && (cursorPosY < (salePos.top + sale.offsetHeight/3))) {
+				sale.style.top = cursorPosY + distStep +'px';
+				sale.style.left = cursorPosX - sale.offsetWidth - distStep +'px';
+			};
+			if((cursorPosX > (salePos.left + sale.offsetWidth*0.75)) && (cursorPosY > (salePos.top + sale.offsetHeight*0.75))) {
+				sale.style.top = cursorPosY - sale.offsetHeight - distStep +'px';
+				sale.style.left = cursorPosX - sale.offsetWidth - distStep +'px';
+			};
+			if((cursorPosX < (salePos.left + sale.offsetWidth/3)) && (cursorPosY > (salePos.top + sale.offsetHeight*0.75))) {
+				sale.style.top = cursorPosY - sale.offsetHeight - distStep +'px';
+				sale.style.left = cursorPosX + distStep +'px';
+			};
+			if((cursorPosX < (salePos.left + sale.offsetWidth/3)) && (cursorPosY < (salePos.top + sale.offsetHeight/3))) {
+				sale.style.top = cursorPosY + distStep +'px';
+				sale.style.left = cursorPosX + distStep +'px';
+			};
+
+			// Уход за пределы екрана
+			if (salePos.top < -sale.offsetHeight + 30) {sale.style.top = window.innerHeight - sale.offsetHeight + 'px'};
+			if (salePos.left < -sale.offsetWidth + 30) {sale.style.left = window.innerWidth - sale.offsetWidth + 'px'};
+			if (salePos.right > window.innerWidth + sale.offsetWidth ) {sale.style.left = 0 + 'px'};
+			if (salePos.top > window.innerHeight) {sale.style.top = 0 + 'px'};
+
 		}
-		console.log(saleCenterX);
-		console.log(saleCenterY);
-		console.log(distance);
+
 	})
-	
 
 }
 </script>

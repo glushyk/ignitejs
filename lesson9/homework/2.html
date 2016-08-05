@@ -5,69 +5,64 @@
 <meta charset="utf-8">
 <style>
 
-	.anchor {
+	.sale {
+		position: absolute;
+		left: 300px;
+		top: 50%;
 		width: 100px;
 		height: 100px;
-		margin: 50px auto;
+		margin: 0 auto;
+		background-color: red;
+		color: #fff;
 		border: 1px solid #888;
-		box-shadow: 3px 3px 3px #999;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 100px;
 	}
-	.note {
-		position: absolute;
-		padding: 5px;
-		color: #555;
-		border: 1px solid #666;
-		border-radius: 4px;
-	}
+
 </style>
 <title>2</title> 
 <!-- 
 
-Создайте функцию positionAt(anchor, position, elem), которая позиционирует элемент elem, в зависимости от значения аргумента position: сверху ("top"), справа ("right") или снизу ("bottom"). Функция должна проводить позиционирование относительно элемента anchor.
-
-Используйте её, чтобы сделать функцию showNote(anchor, position, html), которая показывает элемент с классом class="note" и текстом html на позиции position рядом с элементом anchor.
+Создайте круг красного цвета с надписью "Скидка". Когда курсор пользователя будет приближаться к ней, "Скидка" должна от него "убегать", не давая пользователю нажать на красный круг. Если круг будет выйдет за одну из сторон экрана, то он должен, появится с противоположной стороны.
 
 -->
 </head> 
 	
 <body> 
-<div class="anchor"></div>
+<div class="sale">Скидка</div>
 <script>
 window.onload = function() {
-	function positionAt(anchor, position, elem) {
-		var anchorPos = anchor.getBoundingClientRect();
-		
-		switch (position) {
-		  case "top":
-		    elem.style.left = anchorPos.left + "px";
-		    elem.style.top = anchorPos.top - elem.offsetHeight + "px";
-		    break
-		  case "right":
-		    elem.style.left = anchorPos.left + anchor.offsetWidth + "px";
-		    elem.style.top = anchorPos.top + "px";
-		    break
-		  case "bottom":
-		    elem.style.top = anchorPos.bottom + "px";
-		    elem.style.left = anchorPos.left + "px";
-		    break
-		};
-	};
+	document.addEventListener('mousemove', function(e) {
+		var sale = document.querySelector('.sale');
+		var cursorPosX = e.clientX,
+			cursorPosY = e.clientY,
+			salePos = sale.getBoundingClientRect();
+		console.log('x mouse = ' + cursorPosX);
+		console.log('y mouse = ' + cursorPosY);
+		console.log(salePos);
 
-	function showNote(anchor, position, html) {
-		var note = document.createElement('div');
-		note.className = 'note';
-		note.innerHTML = html;
+		var centerX = sale.offsetWidth/2,
+			centerY = sale.offsetHeight/2;
 
-		document.body.appendChild(note);
+		var saleCenterX = salePos.left + centerX,
+			saleCenterY = salePos.top + centerY;
 
-		positionAt(anchor, position, note);
-	};
+		var distance = Math.sqrt(Math.pow((saleCenterX - cursorPosX),2) + Math.pow((saleCenterY - cursorPosY),2));
 
-	var anchor = document.querySelector('.anchor');
-	showNote(anchor, "top", "Сверху");
-	showNote(anchor, "right", "Справа");
-	showNote(anchor, "bottom", "Снизу");
-
+		if (distance < 60) {
+			if((saleCenterY > (salePos.top + sale.offsetHeight/3)) && (saleCenterY < (salePos.top + sale.offsetHeight*0.75)) && (saleCenterX < cursorPosX)) {
+				//alert('catch')
+				var distStep = 4;
+				sale.style.left = cursorPosX - sale.offsetWidth - distStep +'px';
+			}
+			//alert('catch')
+		}
+		console.log(saleCenterX);
+		console.log(saleCenterY);
+		console.log(distance);
+	})
+	
 
 }
 </script>

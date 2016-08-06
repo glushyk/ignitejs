@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+<!--
+Разработайте страницу с двумя полями ввода и кнопкой. Пользователь должен вводить в поля ввода целочисленный значения, а нажатие по кнопке должно приводить к асинхронному запросу на сервер. Запрашивать следует обработчик CalcHandler.ashx, который находиться вместе с задачей в папке Homework, обработчик принимает два post параметра с именами ‘a’ и ‘b'. Результат который возвращает обработчик выведите на страницу
+-->
+<body>
+
+  <input type="text" id="param1">
+  <input type="text" id="param2">
+  <button>Получить результат</button>
+  <div class="output"></div>
+
+  <script>
+window.addEventListener('load', function() {
+
+  var a = document.querySelector('#param1').value,
+      b = document.querySelector('#param2').value,
+      button= document.querySelector('button');
+
+  button.addEventListener('click', function() {
+    
+    var xhr = new XMLHttpRequest();
+    var body = 'a=' + encodeURIComponent(a) + '&b=' + encodeURIComponent(b);
+    xhr.open('POST', 'CalcHandler.ashx', true);
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState != 4) return;
+
+      if (xhr.status != 200) {
+        alert( xhr.status + ': ' + xhr.statusText );
+      } else {
+        var output = document.querySelector('.output');
+        output.innerHTML = xhr.responseText;
+      };
+    };
+
+    xhr.send(body);
+
+  })
+
+})
+</script>
+
+</body>
+
+</html>

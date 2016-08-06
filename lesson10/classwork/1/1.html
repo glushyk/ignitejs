@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>1</title>
+<style type="text/css">
+</style>
+</head>
+<!-- 
+
+Создайте страницу с кнопкой. Создайте код, который загрузит на страницу картинку img.jpg (файл находитя в папке 1) асинхронно через секунду после загрузки страницы.
+
+-->
+
+<body>
+
+<script>
+window.addEventListener('load', function() {
+
+
+  var myRequest = new XMLHttpRequest();
+
+  var url = 'img.jpg'
+
+  myRequest.open('GET', url, true);
+  myRequest.send();
+  
+  myRequest.onreadystatechange = function() { 
+    if (myRequest.readyState != 4) return;
+  
+  if (myRequest.status != 200) {
+    alert( myRequest.status + ': ' + myRequest.statusText );
+  } else {
+    setTimeout(function() {
+      var img = document.createElement('img');
+      img.setAttribute('src', url);
+      document.body.appendChild(img);
+    }, 1000)
+  };
+};
+
+  
+
+
+})
+
+
+</script>
+</body>
+</body>
+</html>

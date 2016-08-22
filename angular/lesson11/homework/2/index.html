@@ -1,13 +1,104 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>1</title>
+    <title>ToDo List (Task2)</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <style>
+        .edit {
+            cursor: pointer;
+        }
+
+        .popup__container {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            background-color: #fff;
+            background-color: rgba(0,0,0,.3);
+        }
+        .popup_form {
+            width: 30%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body ng-app="app" ng-controller="AppController as todoList">
+
+    <div class="container">
+
+        <h3>ToDo List</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Completed</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="todo in todoList.todos track by $index">
+                <td>{{todo.name}}</td>
+                <td>{{todo.description}}</td>
+                <td>{{todo.date}}</td>
+                <td><input type="checkbox" ng-model="todo.done"></td>
+                <td class="edit"><img src="edit.png" alt="" ng-click="todoList.showPopup($index)"></td>  
+            </tr>
+        </table>
+        <div>
+			<form ng-submit="todoList.addTask()">
+    			<div class="form-group">
+    			  <label for="name">Name</label>
+    			  <input type="text" class="form-control" id="name" placeholder="Enter task name" ng-model="todoList.name">
+    			</div>
+    			<div class="form-group">
+    			  <label for="date">Due Date</label>
+    			  <input type="text" class="form-control" id="date" placeholder="Enter date" ng-model="todoList.date">
+    			</div>
+    			<div class="form-group">
+    			  <label for="description">Description</label>
+    			  <input type="text" class="form-control" id="description" placeholder="Enter description" ng-model="todoList.description">
+    			</div>
+    			<div class="checkbox">
+    			  <label><input type="checkbox" ng-model="todoList.done"> Completed</label>
+    			</div>
+    			<button type="submit" class="btn btn-default">Add</button>
+			</form>
+        </div>
+    </div>
+    <div ng-show='todoList.viewPopup' class="popup__container" ng-click="todoList.hidePopup()">
+    </div>
+    <form class="popup_form" ng-show='todoList.viewPopup'>
+        <div class="form-group">
+            <label for="newName">Name</label>
+            <input type="text" class="form-control" id="newName" placeholder="Enter task name" ng-model="todoList.newName">
+        </div>
+        <div class="form-group">
+            <label for="newDate">Due Date</label>
+            <input type="text" class="form-control" id="newDate" placeholder="Enter date" ng-model="todoList.newDate">
+        </div>
+        <div class="form-group">
+            <label for="newDescription">Description</label>
+            <input type="text" class="form-control" id="newDescription" placeholder="Enter description" ng-model=" todoList.newDescription">
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" ng-model="todoList.newDone"> Completed</label>
+        </div>
+        <button type="submit" class="btn btn-default sbmt" ng-click = "todoList.modify()">Ok</button>
+    </form>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
 <script src="app/app.module.js"></script>
 <script src="app/app.controller.js"></script>
-</head>
-
-
-	
+<script>
+    
+</script>
 </body>
 </html>

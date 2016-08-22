@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>1</title>
+
+</head>
+<body ng-app="app">
+
+    <div class="container" ng-controller="AppController as calculator">
+        <input type="number" ng-model="calculator.firstVal">
+        <input type="number" ng-model="calculator.secondVal">
+        <button ng-click = 'calculator.plus()'>+</button>
+        <button ng-click = 'calculator.minus()'>-</button>
+        <button ng-click = 'calculator.mul()'>*</button>
+        <button ng-click = 'calculator.division()'>/</button>
+        <div class="result" ng-cloak>Result: {{calculator.result}}</div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+<script src="app/app.module.js"></script>
+<script src="app/app.controller.js"></script>
+</body>
+</html>

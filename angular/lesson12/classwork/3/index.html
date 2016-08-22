@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>3</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<style>
+    label {
+        margin-left: 35px;
+    }
+</style>
+
+</head>
+<body ng-app="app">
+
+    <div class="container" ng-controller="AppController as items">
+
+        <h3>Items</h3>
+        <label for="name">Name</label>
+        <input type="checkbox" id="name" ng-model="items.name">
+        <label for="price">Price</label>
+        <input type="checkbox" id="price" ng-model="items.price">
+        <label for="category">Category</label>
+        <input type="checkbox" id="category" ng-model="items.category">
+        <label for="count">Count</label>
+        <input type="checkbox" id="count" ng-model="items.count">
+        <label for="tax">Tax</label>
+        <input type="checkbox" id="tax" ng-model="items.tax">
+        <label for="expiration">Expiration</label>
+        <input type="checkbox" id="expiration" ng-model="items.expiration">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Count</th>
+                    <th>Tax</th>
+                    <th>Expiration</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="item in items.itemsList">
+                <td><ng-include src="items.checkCol(items.name,'files/name.html')"></ng-include></td>
+                <td><ng-include src="items.checkCol(items.price,'files/price.html')"></ng-include></td>
+                <td><ng-include src="items.checkCol(items.category,'files/category.html')"></ng-include></td>
+                <td><ng-include src="items.checkCol(items.count,'files/count.html')"></ng-include></td>
+                <td><ng-include src="items.checkCol(items.tax,'files/tax.html')"></ng-include></td>
+                <td><ng-include src="items.checkCol(items.expiration,'files/expiration.html')"></ng-include></td>
+            </tr>
+        </table>
+        <ng-include src="'files/tax.html'"></ng-include>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+<script src="app/app.module.js"></script>
+<script src="app/app.controller.js"></script>
+</body>
+</html>

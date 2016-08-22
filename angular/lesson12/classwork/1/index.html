@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ToDo List (Task2)</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+</head>
+<body ng-app="app">
+
+    <div class="container" ng-controller="AppController as items">
+
+        <h3>Items</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Count</th>
+                    <th>Tax</th>
+                    <th>Expiration</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="item in items.itemsList">
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.category}}</td>
+                <td>{{item.count}}</td>
+                <td>{{item.tax}}</td>
+                <td>{{item.expiration}}</td>
+            </tr>
+        </table>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+<script src="app/app.module.js"></script>
+<script src="app/app.controller.js"></script>
+</body>
+</html>

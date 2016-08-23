@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>3</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <style>
+        label {
+            display: inline-block;
+            margin-left: 40px;
+        }
+        .qs label {
+            display: block;
+        }
+        .qs input {
+            margin-right: 10px;
+        }
+       .done {
+            background-color: green;
+            color: #fff;
+       }
+    </style>
+</head>
+<body ng-app="app">
+
+    <div class="container" ng-controller="AppController as test">
+        <label for="1">1 <input type="radio" id="1" name="question" value="1" ng-model="test.question"></label>
+        <label for="2">2 <input type="radio" id="2" name="question" value="2" ng-model="test.question"></label>
+        <label for="3">3 <input type="radio" id="3" name="question" value="3" ng-model="test.question"></label>
+        <label for="4">4 <input type="radio" id="4" name="question" value="4" ng-model="test.question"></label>
+        <label for="5">5 <input type="radio" id="5" name="question" value="5" ng-model="test.question"></label>
+
+        <div ng-switch on="test.question" ng-cloack class="qs">
+            <div class="one" ng-switch-when="1">
+                <h1>Сколько будет 2+2</h1>
+                <label for="11"><input type="radio" id="11" name="questionOne" value="1" ng-model="test.questionOne">1</label>
+                <label for="12"><input type="radio" id="12" name="questionOne" value="2" ng-model="test.questionOne">12</label>
+                <label for="13"><input type="radio" id="13" name="questionOne" value="3" ng-model="test.questionOne">100</label>
+                <label for="14"><input type="radio" id="14" name="questionOne" value="0" ng-model="test.questionOne">4</label>               
+            </div>
+            <div class="two" ng-switch-when="2">
+                <h1>Сколько будет 2+20</h1>
+                <label for="21"><input type="radio" id="21" name="questionTwo" value="0" ng-model="test.questionTwo">22</label>
+                <label for="22"><input type="radio" id="22" name="questionTwo" value="2" ng-model="test.questionTwo">12</label>
+                <label for="23"><input type="radio" id="23" name="questionTwo" value="3" ng-model="test.questionTwo">1111</label>
+                <label for="24"><input type="radio" id="24" name="questionTwo" value="4" ng-model="test.questionTwo">234</label>                 
+            </div>
+            <div class="three" ng-switch-when="3">
+                <h1>Сколько будет 1-1</h1>
+                <label for="31"><input type="radio" id="31" name="questionThree" value="1" ng-model="test.questionThree">98</label>
+                <label for="32"><input type="radio" id="32" name="questionThree" value="2" ng-model="test.questionThree">100</label>
+                <label for="33"><input type="radio" id="33" name="questionThree" value="3" ng-model="test.questionThree">-15</label>
+                <label for="34"><input type="radio" id="34" name="questionThree" value="0" ng-model="test.questionThree">0</label>                 
+            </div>
+            <div class="four" ng-switch-when="4">
+                <h1>Сколько будет 22-12</h1>
+                <label for="41"><input type="radio" id="41" name="questionFour" value="1" ng-model="test.questionFour">12</label>
+                <label for="42"><input type="radio" id="42" name="questionFour" value="0" ng-model="test.questionFour">10</label>
+                <label for="43"><input type="radio" id="43" name="questionFour" value="3" ng-model="test.questionFour">0</label>
+                <label for="44"><input type="radio" id="44" name="questionFour" value="4" ng-model="test.questionFour">444</label>                 
+            </div>
+            <div class="five" ng-switch-when="5">
+                <h1>Сколько будет 26+7</h1>
+                <label for="51"><input type="radio" id="51" name="questionFive" value="1" ng-model="test.questionFive">2</label>
+                <label for="52"><input type="radio" id="52" name="questionFive" value="2" ng-model="test.questionFive">32</label>
+                <label for="53"><input type="radio" id="53" name="questionFive" value="0" ng-model="test.questionFive">33</label>
+                <label for="54"><input type="radio" id="54" name="questionFive" value="4" ng-model="test.questionFive">34</label>
+                <button ng-click="test.getResult()">Завершить</button>                
+            </div>
+        </div>
+        <div class="result {{test.complite}}">{{test.result}}</div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+<script src="app/app.module.js"></script>
+<script src="app/app.controller.js"></script>
+</body>
+</html>

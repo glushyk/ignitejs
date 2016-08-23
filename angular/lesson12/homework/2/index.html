@@ -12,27 +12,32 @@
     <div class="container" ng-controller="AppController as items">
 
         <h3>Items</h3>
-        <select ng-model="items.selected" ng-options="item.display for item in items.options track by items.options.value"></select>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Count</th>
-                    <th>Tax</th>
-                    <th>Expiration</th>
+        <select ng-model="items.selected" ng-options="item.display for item in items.options track by item.value"></select>
+        <div ng-switch on="items.selected.value">
+            <table class="table" ng-switch-when="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Count</th>
+                        <th>Tax</th>
+                        <th>Expiration</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="item in items.itemsList">
+                    <td>{{item.name}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.category}}</td>
+                    <td>{{item.count}}</td>
+                    <td>{{item.tax}}</td>
+                    <td>{{item.expiration}}</td>
                 </tr>
-            </thead>
-            <tr ng-repeat="item in items.itemsList">
-                <td>{{item.name}}</td>
-                <td>{{item.price}}</td>
-                <td>{{item.category}}</td>
-                <td>{{item.count}}</td>
-                <td>{{item.tax}}</td>
-                <td>{{item.expiration}}</td>
-            </tr>
-        </table>
+            </table>
+            <ul ng-switch-when="list">
+                <li ng-repeat="item in items.itemsList">{{item.name}} - {{item.price}} - {{item.category}} - {{item.count}} - {{item.tax}} - {{item.expiration}}</li>
+            </ul>
+        </div>
     </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
 <script src="app/app.module.js"></script>

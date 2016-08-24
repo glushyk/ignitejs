@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>13.1</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <style>
+        .container div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #444;
+        }
+        .background {
+            background-color: red;
+            color: #fff;
+        }
+        .border {
+            border: 1px solid #888;
+            border-radius: 10px;
+        }
+        .line {
+            line-height: 30px;
+        }
+        label {
+            display: block;
+        }
+    </style>
+</head>
+<body ng-app="app">
+
+    <div class="container" ng-controller="AppController as classCtrl">
+        <label for="bg"><input type="checkbox" id="bg" ng-model="classCtrl.classList.background">Background</label>
+        <label for="border"><input type="checkbox" id="border" ng-model="classCtrl.classList.border">Border</label>
+        <label for="line"><input type="checkbox" id="line" ng-model="classCtrl.classList.line">Line height</label>
+
+        <p ng-class="classCtrl.classList">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit illum incidunt velit perferendis ut, repellendus qui repudiandae, tempore deserunt molestias nihil neque eos recusandae enim dolorum, blanditiis excepturi quos architecto.</p>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+<script src="app/app.module.js"></script>
+<script src="app/app.controller.js"></script>
+</body>
+</html>

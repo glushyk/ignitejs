@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head> 
+  <meta charset="utf-8">
+  <title>15.1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <style>
+      input {
+        margin-top: 10px;
+      }
+    </style>
+  <script>
+    'use strict';
+    var app = angular.module('myApp', [])
+    
+    .factory('cacheService', ['$cacheFactory', '$timeout', function ($cacheFactory, $timeout) {
+
+      var myCache = $cacheFactory('cacheId');
+      var keys = [];
+
+      return {
+
+        addCache: function (id, value, liveTime) {
+
+
+          myCache.put(id, value);
+          keys.push(id);
+
+          $timeout(function () {
+            var keyId = keys.indexOf(id);
+            myCache.remove(id);
+            delete keys[keyId];
+            alert('Cache with id : '+id+ ' was removed');
+          }, liveTime);
+        },
+
+        currentCache: function () {
+          var cacheCurr = {};
+
+          //for (var i = 0; i < keys.length; i++) {
+          //  cacheCurr[keys[i]] = myCache.get(keys[i]);
+          //}
+
+          keys.forEach(function (key) {
+            cacheCurr[key] = myCache.get(key);
+          });
+
+          return cacheCurr;
+        }
+      }
+    }])
+
+    .controller('appCtrl', ['$scope', 'cacheService', '$timeout', function($scope, cacheService,$timeout) {
+
+      $scope.cacheCurr = cacheService.currentCache();
+
+      $scope.addCache = function () {
+        cacheService.addCache($scope.CacheId, $scope.CacheVal, $scope.CacheLiveTime);
+        $scope.cacheCurr = cacheService.currentCache();
+
+        $timeout(function() {
+          $scope.cacheCurr = cacheService.currentCache();
+        }, $scope.CacheLiveTime)
+
+      };
+
+    }]);
+  </script>
+</head>
+<body ng-controller="appCtrl">
+
+      <input type="text" ng-model="CacheId" placeholder="Enter cache id"><br>
+      <input type="text" ng-model="CacheVal" placeholder="Enter cache val"><br>
+      <input type="text" ng-model="CacheLiveTime" placeholder="Enter cache live time"><br>
+      <input type="button" class="btn btn-success" value="Add new cache" ng-click="addCache()">
+    <div>
+    <h1>Current cache</h1>
+    <ul>
+      <li ng-repeat="(id, value) in cacheCurr">ID: {{id}}<br>Value: {{value}}</li>
+    </ul>
+</body>
+</html>

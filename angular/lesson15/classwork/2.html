@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interval</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+  <script>
+
+  angular.module('myApp', [])
+    .controller('MyController', ['$scope', '$interval',
+
+      function($scope, $interval) {
+
+        $scope.current = 0;
+
+        var stop;
+
+        $scope.start = function() {
+
+          if ( angular.isDefined(stop) ) return;
+          $scope.current = 0;
+          stop = $interval(function() {
+
+              $scope.current = $scope.current + 1;
+
+          }, 1000);
+        };
+
+        $scope.stopTimer = function() {
+          if (angular.isDefined(stop)) {
+            $interval.cancel(stop);
+            stop = undefined;
+          }
+        };
+      }])
+
+</script> 
+</head>
+<body ng-app="myApp">
+  <div>
+    <div ng-controller="MyController">
+      <p color='red'>{{current}}</p>
+      <button type="button" ng-click="start()">Start</button>
+      <button type="button" ng-click="stopTimer()">Stop</button>
+    </div>
+  </div>
+</body>
+</html>

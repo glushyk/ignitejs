@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-cookies.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+    <title>$cookieStore</title>
+    <script>
+        var app = angular.module('myApp', ['ngCookies'])
+
+        .factory('cookieService', ['$cookies',function($cookies) {
+              return {
+                newCookie: function(id, val,output) {
+                  $cookies.put(id, val);
+                  var allCookies = $cookies.get(id);
+                  output.push({val:allCookies, id:id});
+                }
+              }
+        }])
+        .controller('mainCtrl', ['$scope', 'cookieService', function ($scope, cookieService) {
+            $scope.cookieId = '';
+            $scope.cookieVal = '';
+            $scope.output = []; 
+
+            $scope.addCookie = function () {
+                cookieService.newCookie($scope.cookieId, $scope.cookieVal, $scope.output);
+            }
+           
+        }])
+
+
+    </script>
+</head>
+<body ng-controller="mainCtrl">
+    <div class="panel panel-primary">
+
+        <label>cooke ID: <input class="input-lg" ng-model="cookieId"></label><br/>
+        <label>cooke Value: <input class="input-lg" ng-model="cookieVal"></label><br />
+        <input type="button" class="btn-lg btn-success" value="Create Cookie" ng-click="addCookie()"> 
+    </div>
+    <div class="output" ng-repeat="cookie in output">
+      <hr>
+      <p>Добавлено</p>
+      <p>cooke Value: {{cookie.val}}</p>
+      <p>cooke ID: {{cookie.id}}</p>
+    </div>
+</body>
+</html>

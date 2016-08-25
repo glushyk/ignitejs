@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <title>1</title>
+    <script>
+        var app = angular.module('myApp', [])
+
+
+            .provider('clickCounterService', function() {
+                return {
+
+                  $get: function() {
+                    
+                    var clickCounter = 1;
+
+                    return function() {
+                      console.log(clickCounter++);  
+                    } 
+                  }
+                }
+            })
+
+            .controller('mainCtrl', ['$scope', 'clickCounterService', function ($scope, clickCounterService) {
+
+                $scope.countClicks = function () {
+                    clickCounterService();
+                };
+
+            }])
+            
+
+    </script>
+</head>
+<body ng-controller="mainCtrl">
+    <input type="button" class="btn-lg btn-success" value="Click me" ng-click="countClicks()">
+</body>
+</html>

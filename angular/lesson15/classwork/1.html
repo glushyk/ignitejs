@@ -9,9 +9,9 @@
     <script>
         var app = angular.module('myApp', [])
 
-        .config(function ($anchorScrollProvider) {
-            $anchorScrollProvider.disableAutoScrolling();
-        })
+        //.config(function ($anchorScrollProvider) {
+        //    $anchorScrollProvider.disableAutoScrolling();
+        //})
 
         .controller('mainCtrl', function ($scope, $location, $anchorScroll) {
 
@@ -27,7 +27,8 @@
             }
 
             $scope.show = function (id) {
-                $anchorScroll(id); 
+                //$anchorScroll(id);
+                $location.hash(id);
             }
 
         })

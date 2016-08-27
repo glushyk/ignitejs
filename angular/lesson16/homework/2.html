@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="Task/Libraries/angular.js"></script> 
+    <script src="Task/Libraries/angular_route.js"></script>
+    <link href="Task/Libraries/bootstrap.css" rel="stylesheet" />
+
+    <title>Routing1</title>
+    <script>
+        var app = angular.module('myApp', ['ngRoute'])
+        .config(function ($routeProvider, $locationProvider) {
+            $locationProvider.html5Mode({
+              enabled: true,
+              requireBase: false
+            });
+
+            $routeProvider
+                .when('/', {
+                     templateUrl: 'Task/home2.html',
+                })
+                .when('/home', {
+                     templateUrl: 'Task/home2.html',
+                     controller: 'homeController'
+                })
+                .when('/contact', {
+                     templateUrl: 'Task/contact.html',
+                })
+                .otherwise({
+                redirectTo: '/home'
+            })
+        })
+
+        .controller('homeController', function ($scope) {
+            $scope.peoples = [{name: 'Vasya', age: 20, email: 'vasya@mail.ru', employed: false}, 
+                            {name: 'Masha', age: 25, email: 'm@m', employed: true}, 
+                            {name: 'Petya', age: 27, email: 'petya@stuff', employed: true}, 
+                            {name: 'John', age: 36, email: 'johnDoe@mail', employed: true},
+                            {name: 'Jane', age: 28, email: 'janeDoe@mail', employed: false}];
+        })
+
+
+    </script>
+</head>
+<body>
+    <div class="panel panel-primary well">
+        <ul class="nav nav-tabs">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/contact">Contact</a></li> 
+        </ul>
+    </div>
+    <div class="panel" ng-view></div>
+</body>
+</html>

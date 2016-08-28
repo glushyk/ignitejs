@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+    <title>Directives</title>
+    <script>
+        var app = angular.module('myApp', [])
+
+       .controller('mainCtrl', function ($scope) {
+
+           $scope.formOption = [{name: 'username', type:'text'},
+                                {name: 'login', type:'text'},
+                                {name: 'email', type:'email'},
+                                {name: 'password', type:'password'}];
+       })
+
+       .directive('newForm', function () {
+
+           return {
+            
+              restrict: 'A',
+              scope: {
+                formOption: '=newForm'
+              },
+              link: function(scope) {
+
+                var formOption = scope.formOption;
+
+                var form = document.createElement('form');
+
+                for(var i = 0; i < formOption.length; i++) {
+
+                  var formInput = '<label for="' + formOption[i].name + '">' + formOption[i].name + '<input type="' + formOption[i].type +'"' + ' id="' + formOption[i].name + '" /><br>';
+
+                  form.innerHTML += formInput;
+                }
+
+                document.body.appendChild(form);
+
+              }
+
+           } 
+       })
+    </script>
+    <style>
+      input {
+        display: block;
+      }
+      label {
+        text-transform: uppercase;
+      }
+    </style>
+</head>
+<body ng-controller="mainCtrl">
+    <div class="panel">
+      <div new-form="formOption"></div>
+    </div>
+</body>
+</html>

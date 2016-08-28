@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+    <title>Directives</title>
+    <script>
+        var app = angular.module('myApp', [])
+
+       .controller('mainCtrl', function ($scope) {
+
+           $scope.arr = [{name: 'username', type:'text'},
+                          {name: 'login', type:'text'},
+                          {name: 'email', type:'email'},
+                          {name: 'password', type:'password'}];
+       })
+
+       .directive('newTable', function () {
+
+           return {
+            
+              restrict: 'A',
+              scope: {
+                arr: '=newTable'
+              },
+              link: function(scope, element, attr) {
+
+                var array = scope.arr;
+
+                var table = angular.element('<table>');
+                var tableHead = angular.element('<thead>');
+                var tableBody = angular.element('<tbody>');
+                
+
+                for(var name in array[1]) {
+                  var head = angular.element('<th>').text(name)
+                  tableHead.append(head)
+                }
+
+                for(var i=0;i<array.length;i++){
+
+                  var row = angular.element('<tr>');
+
+                  for(var val in array[i]){
+
+                    var rowVal = angular.element('<td>').text(array[i][val]);
+                    row.append(rowVal);
+
+                  }
+                  
+                  tableBody.append(row);
+                }
+
+                table.append(tableHead);
+                table.append(tableBody);
+                element.append(table);
+
+              }
+
+           } 
+       })
+    </script>
+    <style>
+      table * {
+        text-align: center;
+      }
+      label {
+        text-transform: uppercase;
+      }
+    </style>
+</head>
+<body ng-controller="mainCtrl">
+    <div class="panel">
+      <div new-table="arr"></div>
+    </div>
+</body>
+</html>

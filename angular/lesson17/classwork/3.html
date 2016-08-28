@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+    <title>Directives</title>
+    <script>
+        var app = angular.module('myApp', [])
+
+       .controller('mainCtrl', function ($scope) {
+
+           $scope.formOption = [{name: 'username', type:'text', format: /^[A-Za-z]*$/},
+                                {name: 'login', type:'text', format: /^[A-Za-z]*$/},
+                                {name: 'email', type:'email', format: /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/},
+                                {name: 'password', type:'password', format: /^[A-Za-z0-9]*$/}];
+       })
+
+       .directive('newForm', function ($compile) {
+
+           return {
+            
+              restrict: 'A',
+              scope: {
+                formOption: '=newForm'
+              },
+              link: function(scope, element) {
+
+                var formOption = scope.formOption;
+
+                var form = angular.element('<form></form>');
+                form.className = 'reg';
+
+                for(var i = 0; i < formOption.length; i++) {
+
+                  var formInput = angular.element($compile('<label for="' + formOption[i].name + '">' + formOption[i].name + '<input type="' + formOption[i].type +'"' + ' id="' + formOption[i].name + '" ng-pattern="' + formOption[i].format + '" ng-model="' + formOption[i].name + '" /><br>')(scope));
+
+                  //var z = document.createElement('div');
+                  //z.innerHTML = formInput;
+                  //var input = form.children[i];
+                  //console.log(form.innerHTML)
+                  form.append(formInput);
+
+                }
+
+                element.append(form);
+
+              }
+
+           } 
+       })
+    </script>
+    <style>
+      input {
+        display: block;
+      }
+      label {
+        text-transform: uppercase;
+      }
+      .ng-invalid.ng-dirty {
+          background-color: red;
+      }
+    </style>
+</head>
+<body ng-controller="mainCtrl">
+    <div class="panel">
+      <div new-form="formOption"></div>
+    </div>
+</body>
+</html>

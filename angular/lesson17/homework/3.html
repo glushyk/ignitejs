@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+    <title>Directives</title>
+    <script>
+        var app = angular.module('myApp', [])
+
+       .controller('mainCtrl', function ($scope) {
+
+           $scope.navOption = [{name: 'Home', path:'#/home'},
+                                {name: 'Team', path:'#/team'},
+                                {name: 'About', path:'#/about'},
+                                {name: 'Contact', path:'#/contact'}];
+       })
+
+       .directive('newNav', function ($compile) {
+
+           return {
+            
+              restrict: 'A',
+              scope: {
+                navOption: '=newNav'
+              },
+              link: function(scope, element) {
+
+                var navOption = scope.navOption;
+
+                var navList = angular.element('<nav></nav>');
+
+                for(var i = 0; i < navOption.length; i++) {
+
+                  var navItem = angular.element($compile('<a href="' + navOption[i].path + '">' + navOption[i].name + '</a>')(scope));
+
+                  navList.append(navItem);
+                }
+
+                element.append(navList);
+
+              }
+
+           } 
+       })
+    </script>
+    <style>
+      a {
+        display: inline-block;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 20px;
+        text-decoration: none;
+        border-right: 1px solid #888;
+      }
+      nav {
+        display: inline-block;
+        border: 1px solid #888;
+      }
+    </style>
+</head>
+<body ng-controller="mainCtrl">
+    <div class="panel">
+      <div new-nav="navOption"></div>
+    </div>
+</body>
+</html>

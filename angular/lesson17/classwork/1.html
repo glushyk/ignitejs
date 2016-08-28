@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+    <title>Directives</title>
+    <script>
+        var app = angular.module('myApp', [])
+
+       .controller('mainCtrl', function ($scope) {
+           $scope.arr = [];
+
+           for(var i = 0; i < 10; i++) {
+            $scope.arr.push('Item' + i);
+           }
+       })
+
+       .directive('arrToList', function () {
+
+           return {
+            
+              restrict: 'A',
+              template: '<ul><li ng-repeat="item in array">{{item}}</li></ul>',
+              scope: {
+                array: '=arrToList'
+              }
+
+           } 
+       })
+    </script>
+</head>
+<body>
+    <div class="panel" ng-controller="mainCtrl">
+      <div arr-to-list="arr"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+    <title>Directives</title>
+    <script>
+        var app = angular.module('myApp', [])
+
+       .controller('mainCtrl', function ($scope) {
+
+           $scope.items = [
+                { name: "Table", price: 44.10 },
+                { name: "Chair", price: 21.20 },
+                { name: "Pillow", price: 12.20 },
+                { name: "Picture", price: 112.70 },
+                { name: "Lamp", price: 28.31 }
+            ];
+
+            $scope.view = $scope.items[0].price;
+
+            $scope.changeView = function(index) {
+              $scope.view = $scope.items[index].price;
+            }
+       })
+
+       .directive('newNav', function () {
+
+           return {
+            
+              restrict: 'A',
+              scope: false,
+              controller: 'mainCtrl',
+              template: '<nav><a href="#" ng-repeat="item in items" ng-click="changeView($index)">{{item.name}}</li></nav>'
+
+           } 
+       })
+       .directive('getData', function () {
+
+           return {
+            
+              restrict: 'A',
+              scope: false,
+              controller: 'mainCtrl',
+              template: '<p>{{view | currency}}</p>'
+
+           } 
+       })
+    </script>
+    <style>
+      a {
+        display: inline-block;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 20px;
+        text-decoration: none;
+        border-right: 1px solid #888;
+        cursor: pointer;
+      }
+      nav {
+        display: inline-block;
+        border: 1px solid #888;
+      }
+    </style>
+</head>
+<body ng-controller="mainCtrl">
+    <div class="panel">
+      <div new-nav></div>
+      <div get-data></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+    <title>3</title> 
+    <script>
+
+        var app = angular.module('myApp', []) 
+ 
+        .directive('dialogBox', function () {
+            return {
+                restrict: 'A',
+                transclude: true,
+                template: '<div class="dialog-container"><div class="dialog" ng-transclude></div></div>'
+            }
+        })
+
+
+    </script>
+    <style>
+        .dialog-container {
+            position: fixed;
+            top:0;
+            left: 50%;
+            transform: translate(-50%);
+        }
+        .dialog {
+            width: 50%;
+            padding: 40px;
+            border: 1px solid #999;
+        }
+    </style>
+</head>
+<body>
+
+    <div dialog-box>Hey Hey</div>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head> 
+    <meta charset="utf-8">
+    <title>2</title>
+    <style>
+        .red {
+            color: red
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+    <script>
+
+        var app = angular.module('myApp', [])
+        
+        .controller('mainCtrl', ['$scope', function ($scope) {
+
+            $scope.items = ['One', 'Two', 'Tree', 'Four'];
+
+        }])
+
+        .directive('newList', function () {
+            return {
+                restrict: 'A',
+                priority: 1,
+                link: function (scope, element, attr) {
+
+                            var items = scope.items;
+
+                            var list = angular.element('<ul></ul>');
+
+                            for (var i = 0; i < items.length; i++) {
+
+                                var inner = angular.element('<li></li>').html(items[i]);
+                                
+                                list.append(inner);
+
+                            }
+                            element.append(list);
+                        }
+
+            }
+        })
+        
+        .directive('makeStyle', function () {
+            return {
+                restrict: 'A',
+                priority: 2,
+                link: function (scope, element, attr) {
+
+                    var li = document.querySelectorAll('li');
+
+                    //console.log(li);
+
+                    for(var i = 0; i < li.length; i++) {
+                        if (i%2) {
+                            li[i].className = 'red';
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</head>
+<body ng-controller="mainCtrl">
+    <div new-list make-style></div>
+</body>
+</html>

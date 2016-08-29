@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+    <title>Directives</title>
+    <script>
+        var app = angular.module('myApp', [])
+
+      .directive('counterButton', function () {
+          return {
+              restrict: 'A',
+              templateUrl: 'templates/template1.html',
+              scope: {},
+              controller: function ($scope, $interval) {
+                  this.counter = 0;
+                  var interval;
+                  var self = this;
+
+                  this.startCounter = function () {
+                      
+                      interval = $interval(function () {
+                          self.counter++;
+                      }, 1000)
+                  }
+              }, 
+              controllerAs: 'ctrl',
+              bindToController: true
+          }
+      })
+
+
+    </script>
+</head>
+<body>
+      <div counter-button></div>
+</body>
+</html>
